@@ -126,5 +126,19 @@ namespace RayCarrot.Common
         {
             return toRemove.Where(x => !x.IsNullOrWhiteSpace()).Aggregate(input, (current, s) => current.Replace(s, String.Empty));
         }
+
+        /// <summary>
+        /// Truncates a string to have the specified maximum length
+        /// </summary>
+        /// <param name="value">The string to truncate</param>
+        /// <param name="maxLength">The max string length</param>
+        /// <returns>The truncated string</returns>
+        public static string Truncate(this string value, int maxLength)
+        {
+            if (value.IsNullOrEmpty()) 
+                return value;
+
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
     }
 }
