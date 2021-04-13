@@ -51,6 +51,30 @@ namespace RayCarrot.Common
         }
 
         /// <summary>
+        /// Sets the specified flag on the enum value
+        /// </summary>
+        /// <typeparam name="T">The enum type</typeparam>
+        /// <param name="value">The enum value</param>
+        /// <param name="flag">The flag to set</param>
+        /// <param name="set">True to set the flag, false to clear it</param>
+        /// <returns>The new enum value</returns>
+        public static T SetFlag<T>(this Enum value, T flag, bool set)
+            where T : Enum
+        {
+            Type underlyingType = Enum.GetUnderlyingType(value.GetType());
+
+            dynamic valueAsInt = Convert.ChangeType(value, underlyingType);
+            dynamic flagAsInt = Convert.ChangeType(flag, underlyingType);
+
+            if (set)
+                valueAsInt |= flagAsInt;
+            else
+                valueAsInt &= ~flagAsInt;
+
+            return (T)valueAsInt;
+        }
+
+        /// <summary>
         /// Gets all values for an <see cref="Enum"/>
         /// </summary>
         /// <typeparam name="T">The type of enum</typeparam>

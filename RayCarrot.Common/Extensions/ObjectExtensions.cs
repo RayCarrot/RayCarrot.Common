@@ -18,5 +18,22 @@ namespace RayCarrot.Common
         {
             return (T)item;
         }
+
+        /// <summary>
+        /// Clamps the value to the specified min and max values
+        /// </summary>
+        /// <typeparam name="T">The value type</typeparam>
+        /// <param name="val">The value to clamp</param>
+        /// <param name="min">The minimum allowed value</param>
+        /// <param name="max">The maximum allowed value</param>
+        /// <returns>The clamped value</returns>
+        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
+        {
+            if (val.CompareTo(min) < 0) 
+                return min;
+            else if (val.CompareTo(max) > 0) 
+                return max;
+            else return val;
+        }
     }
 }
